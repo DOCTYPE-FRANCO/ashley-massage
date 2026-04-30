@@ -636,6 +636,117 @@ const Testimonials = () => {
   );
 };
 
+
+const GALLERY = [
+  {
+    title: "Calm Treatment Room",
+    category: "Studio",
+    image:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Hot Stone Therapy",
+    category: "Treatment",
+    image:
+      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Aromatherapy Oils",
+    category: "Products",
+    image:
+      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Relaxation Suite",
+    category: "Ambience",
+    image:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Deep Tissue Session",
+    category: "Therapy",
+    image:
+      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Peaceful Details",
+    category: "Wellness",
+    image:
+      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const GalleryCard = ({ item, delay }) => {
+  const [ref, visible] = useReveal();
+
+  return (
+    <div
+      ref={ref}
+      className={`group relative overflow-hidden rounded-3xl h-72 transition-all duration-700 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+      style={{
+        transitionDelay: `${delay}ms`,
+        boxShadow: "0 8px 28px rgba(14,165,233,0.12)",
+      }}
+    >
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-sky-950/70 via-sky-900/10 to-transparent" />
+
+      <div className="absolute left-5 right-5 bottom-5">
+        <p className="text-sky-100 text-[11px] uppercase tracking-widest font-medium mb-1">
+          {item.category}
+        </p>
+        <h3 className="font-serif text-2xl font-semibold text-white">
+          {item.title}
+        </h3>
+      </div>
+    </div>
+  );
+};
+
+const Gallery = () => {
+  const [ref, visible] = useReveal();
+
+  return (
+    <section id="gallery" className="py-24 bg-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <div
+          ref={ref}
+          className={`text-center mb-16 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <span className="inline-block text-xs font-medium text-sky-500 uppercase tracking-widest mb-3">
+            Our Space
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl font-light text-sky-900">
+            A Glimpse of{" "}
+            <em className="not-italic font-semibold text-sky-600">
+              Serenity
+            </em>
+          </h2>
+          <p className="text-sky-600 text-base font-light max-w-xl mx-auto mt-4 leading-relaxed">
+            Step inside the calm, care, and quiet details that shape every Ashley Massage experience.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {GALLERY.map((item, i) => (
+            <GalleryCard key={item.title} item={item} delay={i * 90} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
 /* ══════════════════════════════════════════════════════════════
    7. BOOKING CTA
 ══════════════════════════════════════════════════════════════ */
@@ -823,6 +934,7 @@ export default function HomePage() {
       <About/>
       <HowItWorks/>
       <Testimonials/>
+      <Gallery/>
       <Booking/>
       <Footer/>
     </>
